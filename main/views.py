@@ -14,6 +14,10 @@ stripe.api_key = os.getenv('SEC_KEY')
 
 
 class CreateCheckoutSessionView(View):
+    """
+    Gets the ID of the Stripe session used for payment for the item chosen.
+    Invokes the Stripe checkout session by sending data related to the item.
+    """
     def post(self, request, *args, **kwargs):
         item_id = self.kwargs['pk']
         item = Item.objects.get(id=item_id)
@@ -46,6 +50,9 @@ class CreateCheckoutSessionView(View):
 
 
 def item_details(request, pk):
+    """
+    Displays an individual instance of the model Item.
+    """
     item = Item.objects.get(pk=pk)
     context = {
         'item': item,
@@ -55,9 +62,15 @@ def item_details(request, pk):
 
 
 def index(request):
+    """
+    Displays a list of the model Item instances.
+    """
     items = Item.objects.all()
     return render(request, 'main/items_list.html', {'items': items})
 
 
 def thanks(request):
+    """
+    Displays text after successful payment.
+    """
     return render(request, 'main/thanks.html')
