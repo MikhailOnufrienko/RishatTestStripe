@@ -8,5 +8,5 @@ How to install the app locally:
 To test the app using remote server, go to <a href="http://cdcollectionsale.site/index">cdcollectionsale</a>,
 choose an item and push the button 'Buy'. When Stripe window opens,
 enter an email, type '4242 4242 4242 4242' (credit card number field)
-and any data later than this month (card expiry date). CVV/CVC code may be
-any numbers, card holder name may contain any name.
+and any data later than this month (card expiry date). CVV/CVC code may include
+any numbers, card holder name also may contain any name.
