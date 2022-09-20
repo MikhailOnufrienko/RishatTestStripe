@@ -1,9 +1,11 @@
-from django.shortcuts import render
-from django.http import HttpResponse, JsonResponse
-from django.views import View
-import stripe
 import os
+
+import stripe
+from django.http import JsonResponse
+from django.shortcuts import render
+from django.views import View
 from dotenv import load_dotenv
+
 from .models import Item
 
 load_dotenv()
@@ -16,6 +18,7 @@ class CreateCheckoutSessionView(View):
         item_id = self.kwargs['pk']
         item = Item.objects.get(id=item_id)
         DOMAIN = r'http://127.0.0.1:8000'
+        # DOMAIN = r'http://cdcollectionsale.site'
         checkout_session = stripe.checkout.Session.create(
             payment_method_types=['card'],
             line_items=[
@@ -35,7 +38,7 @@ class CreateCheckoutSessionView(View):
             },
             mode='payment',
             success_url=DOMAIN + '/thanks/',
-            cancel_url=DOMAIN + '/index/',
+            cancel_url=DOMAIN + '/index/'
         )
         return JsonResponse({
             'id': checkout_session.id
@@ -57,5 +60,4 @@ def index(request):
 
 
 def thanks(request):
-    msg = 'Thanks!'
-    return HttpResponse(msg, content_type='text/plain')
+    return render(request, 'main/thanks.html')

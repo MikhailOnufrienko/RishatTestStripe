@@ -3,7 +3,6 @@ from pathlib import Path
 
 from dotenv import load_dotenv
 
-
 load_dotenv()
 
 SECRET_KEY = str(os.getenv('DJANGO_SEC_KEY'))
